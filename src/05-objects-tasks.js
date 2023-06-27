@@ -122,7 +122,7 @@ const cssSelectorBuilder = {
   res: '',
   x: [],
   element(value) {
-    if (this.x[0] || this.x[1] || this.x[2] || this.x[3] || this.x[4]) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    if (this.res.includes('#')) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
     const objRes = {};
     Object.setPrototypeOf(objRes, cssSelectorBuilder);
     objRes.res = this.res + value;
@@ -131,39 +131,36 @@ const cssSelectorBuilder = {
   },
 
   id(value) {
-    if (this.x[1] || this.x[2] || this.x[3] || this.x[4]) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    if (this.res.includes('.') || this.res.includes('::')) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
     const objRes = {};
     Object.setPrototypeOf(objRes, cssSelectorBuilder);
     objRes.res = `${this.res}#${value}`;
     if (this.res.includes('#')) throw Error('Element, id and pseudo-element should not occur more then one time inside the selector');
-    this.x[0] = 0;
-    return objRes;
-  },
-
-  class(value) {
-    if (this.x[2] || this.x[3] || this.x[4]) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
-    const objRes = {};
-    Object.setPrototypeOf(objRes, cssSelectorBuilder);
-    objRes.res = `${this.res}.${value}`;
     this.x[1] = 0;
     return objRes;
   },
 
+  class(value) {
+    if (this.res.includes('[')) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    const objRes = {};
+    Object.setPrototypeOf(objRes, cssSelectorBuilder);
+    objRes.res = `${this.res}.${value}`;
+    return objRes;
+  },
+
   attr(value) {
-    if (this.x[3] || this.x[4]) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    if (this.res.includes(':')) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
     const objRes = {};
     Object.setPrototypeOf(objRes, cssSelectorBuilder);
     objRes.res = `${this.res}[${value}]`;
-    this.x[2] = 0;
     return objRes;
   },
 
   pseudoClass(value) {
-    if (this.x[4]) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    if (this.res.includes('::')) throw Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
     const objRes = {};
     Object.setPrototypeOf(objRes, cssSelectorBuilder);
     objRes.res = `${this.res}:${value}`;
-    this.x[3] = 0;
     return objRes;
   },
 
@@ -172,7 +169,6 @@ const cssSelectorBuilder = {
     Object.setPrototypeOf(objRes, cssSelectorBuilder);
     if (this.res.includes('::')) throw Error('Element, id and pseudo-element should not occur more then one time inside the selector');
     objRes.res = `${this.res}::${value}`;
-    this.x[4] = 0;
     return objRes;
   },
 
