@@ -434,8 +434,24 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const res = [];
+  const r1 = m1.length;
+  const r2 = m2.length;
+  const c2 = m2[0].length;
+  for (let i = 0; i < r1; i += 1) {
+    res[i] = [];
+  }
+  for (let i = 0; i < c2; i += 1) {
+    for (let j = 0; j < r1; j += 1) {
+      let x = 0;
+      for (let k = 0; k < r2; k += 1) {
+        x += m1[j][k] * m2[k][i];
+        res[j][i] = x;
+      }
+    }
+  }
+  return res;
 }
 
 
