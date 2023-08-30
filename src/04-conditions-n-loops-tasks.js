@@ -126,10 +126,10 @@ function isTriangle(a, b, c) {
  */
 function doRectanglesOverlap(rect1, rect2) {
   return (
-    rect1.left + rect1.width - rect2.left > 0 &&
-    rect1.top + rect1.height - rect2.top > 0 &&
-    rect2.left + rect2.width - rect1.left > 0 &&
-    rect2.top + rect2.height - rect1.top > 0
+    rect1.left + rect1.width - rect2.left > 0
+    && rect1.top + rect1.height - rect2.top > 0
+    && rect2.left + rect2.width - rect1.left > 0
+    && rect2.top + rect2.height - rect1.top > 0
   );
 }
 
@@ -160,9 +160,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *
  */
 function isInsideCircle(circle, point) {
-  const l = Math.sqrt(
-    (circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2
-  );
+  const l = Math.sqrt((circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2);
   return circle.radius > l;
 }
 
@@ -479,55 +477,57 @@ function getMatrixProduct(m1, m2) {
  */
 function evaluateTicTacToePosition(position) {
   if (
-    (position[0][0] === 'X' &&
-      position[1][1] === 'X' &&
-      position[2][2] === 'X') ||
-    (position[0][0] === 'X' &&
-      position[0][1] === 'X' &&
-      position[0][2] === 'X') ||
-    (position[1][0] === 'X' &&
-      position[1][1] === 'X' &&
-      position[1][2] === 'X') ||
-    (position[2][0] === 'X' &&
-      position[2][1] === 'X' &&
-      position[2][2] === 'X') ||
-    (position[0][2] === 'X' &&
-      position[1][1] === 'X' &&
-      position[2][0] === 'X') ||
-    (position[0][0] === 'X' &&
-      position[1][0] === 'X' &&
-      position[2][0] === 'X') ||
-    (position[0][1] === 'X' &&
-      position[1][1] === 'X' &&
-      position[2][1] === 'X') ||
-    (position[0][2] === 'X' && position[1][2] === 'X' && position[2][2] === 'X')
-  )
-    return 'X';
+    (position[0][0] === 'X'
+    && position[1][1] === 'X'
+    && position[2][2] === 'X')
+    || (position[0][0] === 'X'
+    && position[0][1] === 'X'
+    && position[0][2] === 'X')
+    || (position[1][0] === 'X'
+    && position[1][1] === 'X'
+    && position[1][2] === 'X')
+    || (position[2][0] === 'X'
+    && position[2][1] === 'X'
+    && position[2][2] === 'X')
+    || (position[0][2] === 'X'
+    && position[1][1] === 'X'
+    && position[2][0] === 'X')
+    || (position[0][0] === 'X'
+    && position[1][0] === 'X'
+    && position[2][0] === 'X')
+    || (position[0][1] === 'X'
+    && position[1][1] === 'X'
+    && position[2][1] === 'X')
+    || (position[0][2] === 'X'
+    && position[1][2] === 'X'
+    && position[2][2] === 'X')
+  ) return 'X';
   if (
-    (position[0][0] === '0' &&
-      position[1][1] === '0' &&
-      position[2][2] === '0') ||
-    (position[0][0] === '0' &&
-      position[0][1] === '0' &&
-      position[0][2] === '0') ||
-    (position[1][0] === '0' &&
-      position[1][1] === '0' &&
-      position[1][2] === '0') ||
-    (position[2][0] === '0' &&
-      position[2][1] === '0' &&
-      position[2][2] === '0') ||
-    (position[0][2] === '0' &&
-      position[1][1] === '0' &&
-      position[2][0] === '0') ||
-    (position[0][0] === '0' &&
-      position[1][0] === '0' &&
-      position[2][0] === '0') ||
-    (position[0][1] === '0' &&
-      position[1][1] === '0' &&
-      position[2][1] === '0') ||
-    (position[0][2] === '0' && position[1][2] === '0' && position[2][2] === '0')
-  )
-    return '0';
+    (position[0][0] === '0'
+    && position[1][1] === '0'
+    && position[2][2] === '0')
+    || (position[0][0] === '0'
+    && position[0][1] === '0'
+    && position[0][2] === '0')
+    || (position[1][0] === '0'
+    && position[1][1] === '0'
+    && position[1][2] === '0')
+    || (position[2][0] === '0'
+    && position[2][1] === '0'
+    && position[2][2] === '0')
+    || (position[0][2] === '0'
+    && position[1][1] === '0'
+    && position[2][0] === '0')
+    || (position[0][0] === '0'
+    && position[1][0] === '0'
+    && position[2][0] === '0')
+    || (position[0][1] === '0'
+    && position[1][1] === '0'
+    && position[2][1] === '0')
+    || (position[0][2] === '0'
+    && position[1][2] === '0'
+    && position[2][2] === '0')
+  ) return '0';
   return undefined;
 }
 
