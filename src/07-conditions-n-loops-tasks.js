@@ -6,7 +6,6 @@
  *                                                                                                *
  ************************************************************************************************ */
 
-
 /**
  * Returns the 'Fizz','Buzz' or an original number using the following rules:
  * 1) return original number
@@ -34,7 +33,6 @@ function getFizzBuzz(num) {
   return num;
 }
 
-
 /**
  * Returns the factorial of the specified integer n.
  *
@@ -53,7 +51,6 @@ function getFactorial(n) {
   }
   return res;
 }
-
 
 /**
  * Returns the sum of integer numbers between n1 and n2 (inclusive).
@@ -75,7 +72,6 @@ function getSumBetweenNumbers(n1, n2) {
   return res;
 }
 
-
 /**
  * Returns true, if a triangle can be built with the specified sides a, b, c
  * and false in any other ways.
@@ -92,10 +88,9 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a, b, c) {
-  if ((a + b) > c && ((a + c) > b) && ((b + c) > a)) return true;
+  if (a + b > c && a + c > b && b + c > a) return true;
   return false;
 }
-
 
 /**
  * Returns true, if two specified axis-aligned rectangles overlap, otherwise false.
@@ -130,12 +125,13 @@ function isTriangle(a, b, c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-  return (rect1.left + rect1.width - rect2.left > 0)
-  && (rect1.top + rect1.height - rect2.top > 0)
-  && (rect2.left + rect2.width - rect1.left > 0)
-  && (rect2.top + rect2.height - rect1.top > 0);
+  return (
+    rect1.left + rect1.width - rect2.left > 0
+    && rect1.top + rect1.height - rect2.top > 0
+    && rect2.left + rect2.width - rect1.left > 0
+    && rect2.top + rect2.height - rect1.top > 0
+  );
 }
-
 
 /**
  * Returns true, if point lies inside the circle, otherwise false.
@@ -168,7 +164,6 @@ function isInsideCircle(circle, point) {
   return circle.radius > l;
 }
 
-
 /**
  * Returns the first non repeated char in the specified strings otherwise returns null.
  *
@@ -184,15 +179,15 @@ function findFirstSingleChar(str) {
   const resArr = [];
   const arr = [];
   for (let i = 0; i < str.length; i += 1) {
-    if (!(str.slice(i + 1).includes(str[i]))) {
+    if (!str.slice(i + 1).includes(str[i])) {
       resArr.push(str[i]);
     } else arr.push(str[i]);
   }
   if (!arr.includes(resArr[0])) {
     return resArr[0];
-  } return null;
+  }
+  return null;
 }
-
 
 /**
  * Returns the string representation of math interval,
@@ -229,7 +224,6 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   return `${s}${b}, ${a}${e}`;
 }
 
-
 /**
  * Reverse the specified string (put all chars in reverse order)
  *
@@ -246,7 +240,6 @@ function reverseString(str) {
   return str.split('').reverse().join('');
 }
 
-
 /**
  * Reverse the specified integer number (put all digits in reverse order)
  *
@@ -262,7 +255,6 @@ function reverseString(str) {
 function reverseInteger(num) {
   return +num.toString().split('').reverse().join('');
 }
-
 
 /**
  * Validates the CCN (credit card number) and return true if CCN is valid
@@ -311,11 +303,13 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  const res = num.toString().split('').reduce((sum, item) => +sum + +item);
+  const res = num
+    .toString()
+    .split('')
+    .reduce((sum, item) => +sum + +item);
   if (res > 9) return +res.toString()[0] + +res.toString()[1];
   return res;
 }
-
 
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
@@ -362,9 +356,8 @@ function isBracketsBalanced(str) {
     }
   }
   if (stack.length === 0 && f) res = true;
-  return (res);
+  return res;
 }
-
 
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
@@ -390,7 +383,6 @@ function toNaryString(num, n) {
   return num.toString(n);
 }
 
-
 /**
  * Returns the common directory path for specified array of full filenames.
  *
@@ -414,7 +406,6 @@ function getCommonDirectoryPath(pathes) {
   }
   return res.length ? `${res.join('/')}/` : '';
 }
-
 
 /**
  * Returns the product of two specified matrixes.
@@ -454,7 +445,6 @@ function getMatrixProduct(m1, m2) {
   return res;
 }
 
-
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
  * See the details: https://en.wikipedia.org/wiki/Tic-tac-toe
@@ -485,10 +475,61 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if (
+    (position[0][0] === 'X'
+    && position[1][1] === 'X'
+    && position[2][2] === 'X')
+    || (position[0][0] === 'X'
+    && position[0][1] === 'X'
+    && position[0][2] === 'X')
+    || (position[1][0] === 'X'
+    && position[1][1] === 'X'
+    && position[1][2] === 'X')
+    || (position[2][0] === 'X'
+    && position[2][1] === 'X'
+    && position[2][2] === 'X')
+    || (position[0][2] === 'X'
+    && position[1][1] === 'X'
+    && position[2][0] === 'X')
+    || (position[0][0] === 'X'
+    && position[1][0] === 'X'
+    && position[2][0] === 'X')
+    || (position[0][1] === 'X'
+    && position[1][1] === 'X'
+    && position[2][1] === 'X')
+    || (position[0][2] === 'X'
+    && position[1][2] === 'X'
+    && position[2][2] === 'X')
+  ) return 'X';
+  if (
+    (position[0][0] === '0'
+    && position[1][1] === '0'
+    && position[2][2] === '0')
+    || (position[0][0] === '0'
+    && position[0][1] === '0'
+    && position[0][2] === '0')
+    || (position[1][0] === '0'
+    && position[1][1] === '0'
+    && position[1][2] === '0')
+    || (position[2][0] === '0'
+    && position[2][1] === '0'
+    && position[2][2] === '0')
+    || (position[0][2] === '0'
+    && position[1][1] === '0'
+    && position[2][0] === '0')
+    || (position[0][0] === '0'
+    && position[1][0] === '0'
+    && position[2][0] === '0')
+    || (position[0][1] === '0'
+    && position[1][1] === '0'
+    && position[2][1] === '0')
+    || (position[0][2] === '0'
+    && position[1][2] === '0'
+    && position[2][2] === '0')
+  ) return '0';
+  return undefined;
 }
-
 
 module.exports = {
   getFizzBuzz,
